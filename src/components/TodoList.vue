@@ -54,10 +54,7 @@ onMounted(() => {initListItems()
 
 <template>
   <ul>
-    <li
-        :key='key'
-        v-for='(item, key) in listItems'
-    >
+    <li :key='key' v-for='(item, key) in sortedList'>
       <ListItem :is-checked='item.checked' v-on:click.prevent="updateItem(item)">
         {{ item.title }}
       </ListItem>
@@ -69,6 +66,7 @@ onMounted(() => {initListItems()
 ul {
   list-style: none;
 }
+
 li {
   margin: 0.4rem 0;
 }
