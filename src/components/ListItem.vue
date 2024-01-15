@@ -1,9 +1,10 @@
 <script setup lang="ts">
-defineProps<{
-  isChecked?: boolean | false
-}>()
-</script>
+interface Props {
+  isChecked?: boolean | false;
+}
 
+const props = defineProps<Props>()
+</script>
 <template>
   <label :class="{ 'checked': isChecked }">
     <input type="checkbox" :checked="isChecked" />
