@@ -44,11 +44,10 @@ const getFromStorage = (): Item[] | [] => {
   }
   return []
 }
-const storageItems: Ref<Item[]> = ref([])
+
 onMounted(() => {initListItems()
   storageItems.value = getFromStorage()
 })
-
 
 </script>
 
