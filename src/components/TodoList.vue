@@ -71,7 +71,7 @@ onMounted(() => {initListItems()
 
 <template>
   <ul>
-    <li :key='key' v-for='(item, key) in sortedList'>
+    <li :key="item.title" v-for="item in sortedList">
       <ListItem :is-checked="item.checked" @update:checked="newChecked => handleUpdateChecked(item, newChecked)">
         {{ item.title }}
       </ListItem>
