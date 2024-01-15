@@ -19,7 +19,8 @@ const listItems: Ref<Item[]> = ref([
   { title: 'Publish my work' }
 ])
 
-const updateItem = (item: Item): void => {  const updatedItem = findItemInList(item)
+const updateItem = (item: Item): void => {
+  const updatedItem = findItemInList(item)
   if (updatedItem) {
     toggleItemChecked(updatedItem)
   }
