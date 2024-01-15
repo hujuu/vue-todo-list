@@ -56,6 +56,14 @@ const getFromStorage = (): Item[] | [] => {
   return []
 }
 
+const handleUpdateChecked = (item: Item, newChecked: boolean) => {
+  const foundItem = storageItems.value.find(i => i.title === item.title);
+  if (foundItem) {
+    foundItem.checked = newChecked;
+    setToStorage(storageItems.value);
+  }
+};
+
 onMounted(() => {initListItems()
   storageItems.value = getFromStorage()
 })
@@ -64,7 +72,7 @@ onMounted(() => {initListItems()
 <template>
   <ul>
     <li :key='key' v-for='(item, key) in sortedList'>
-      <ListItem :is-checked='item.checked' v-on:click.prevent="updateItem(item)">
+      <ListItem :is-checked="item.checked" @update:checked="newChecked => handleUpdateChecked(item, newChecked)">
         {{ item.title }}
       </ListItem>
     </li>
