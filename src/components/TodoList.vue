@@ -23,10 +23,11 @@ const updateItem = (item: Item): void => {
   const updatedItem = findItemInList(item)
   if (updatedItem) {
     toggleItemChecked(updatedItem)
+    setToStorage(storageItems.value)
   }
 }
 const findItemInList = (item: Item): Item | undefined => {
-  return listItems.value.find(
+  return storageItems.value.find(
       (itemInList: Item) => itemInList.title === item.title
   )
 }
