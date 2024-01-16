@@ -14,8 +14,8 @@ const toggleChecked = () => {
 </script>
 
 <template>
-  <div>
-    <input type="checkbox" :checked="props.isChecked" @change="toggleChecked" />
+  <div @click="toggleChecked">
+    <input type="checkbox" :checked="props.isChecked" />
     <label :class="{ 'checked': props.isChecked }">
       <slot></slot>
     </label>
