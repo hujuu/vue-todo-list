@@ -5,7 +5,7 @@ import type { Ref } from 'vue'
 
 type Item = {
   title: string,
-  checked: boolean
+  checked?: boolean
 }
 
 const storageItems: Ref<Item[]> = ref([])
@@ -28,22 +28,6 @@ const initListItems = (): void => {
   }
 }
 
-const updateItem = (item: Item): void => {
-  const updatedItem = findItemInList(item)
-  if (updatedItem) {
-    toggleItemChecked(updatedItem)
-    setToStorage(storageItems.value)
-  }
-}
-const findItemInList = (item: Item): Item | undefined => {
-  return storageItems.value.find(
-      (itemInList: Item) => itemInList.title === item.title
-  )
-}
-const toggleItemChecked = (item: Item): void => {
-  item.checked = !item.checked
-}
-
 const sortedList = computed(() => [...storageItems.value].sort((a, b) => (a.checked ? 1 : 0) - (b.checked ? 1 : 0)))
 const setToStorage = (items: Item[]): void => {
   localStorage.setItem('list-items', JSON.stringify(items))
@@ -64,9 +48,14 @@ const handleUpdateChecked = (item: Item, newChecked: boolean) => {
   }
 };
 
-onMounted(() => {initListItems()
-  storageItems.value = getFromStorage()
-})
+onMounted(() => {
+  const storedItems = getFromStorage();
+  if (storedItems && storedItems.length > 0) {
+    storageItems.value = storedItems;
+  } else {
+    initListItems();
+  }
+});
 </script>
 
 <template>
