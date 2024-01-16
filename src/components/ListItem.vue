@@ -1,15 +1,25 @@
 <script setup lang="ts">
+import { defineProps, defineEmits } from 'vue';
+
 interface Props {
-  isChecked?: boolean | false;
+  isChecked: boolean;
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits(['update:checked']);
+
+const toggleChecked = () => {
+  emit('update:checked', !props.isChecked);
+};
 </script>
+
 <template>
-  <label :class="{ 'checked': isChecked }">
-    <input type="checkbox" :checked="isChecked" />
-    <slot></slot>
-  </label>
+  <div>
+    <input type="checkbox" :checked="props.isChecked" @change="toggleChecked" />
+    <label :class="{ 'checked': props.isChecked }">
+      <slot></slot>
+    </label>
+  </div>
 </template>
 
 <style scoped>
