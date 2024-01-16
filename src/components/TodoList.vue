@@ -5,7 +5,7 @@ import type { Ref } from 'vue'
 
 type Item = {
   title: string,
-  checked?: boolean
+  checked: boolean
 }
 
 const storageItems: Ref<Item[]> = ref([])
